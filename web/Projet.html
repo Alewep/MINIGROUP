@@ -2,10 +2,30 @@
 <html>
 <head>
 <title>We are m(usicians) and we play rock n’ roll !</title>
-<script src="Projet.js"></script>
 <script src="parseTabHtml.js"></script>
 </head>
 <body>
+    <table id="tableauListe">
+        <tr id="ligneInstru">
+            <th>Ajout instrument:</th>
+            <td><input type="text" id="ajoutInstru" name="ajoutInstru"></td>
+            <td><input type="button" value="Ajouter instrument" onclick="ajoutInstru()"></button></td>
+            <td id="Instru"></td>
+        </tr>
+        <tr id="ligneVille">
+            <th>Ajout ville:</th>
+            <td><input type="text" id="ajoutVille" name="ajoutVille"></td>
+            <td><input type="button" value="Ajouter ville" onclick="ajoutVille()"></button></td>
+            <td id="Villes"></td>
+        </tr>
+        <tr id="ligneStyles">
+            <th>Ajout style:</th>
+            <td><input type="text" id="ajoutStyles" name="ajoutStyles"></td>
+            <td><input type="button" value="Ajouter style" onclick="ajoutStyles()"></button></td>
+            <td id="Styles"></td>
+        </tr>
+    </table>
+    <br><br><br>
     <form>
         <table id="Table" border="1">
             <thead>
@@ -24,11 +44,11 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-                <tr id="ligne0">
+                <!--<tr id="ligne0">
                     <td><input type="text" id="Nom0" name="Nom"></td>
                     <td><input type="int" id="Nb_heures_hebdo0" name="Nb_heures_hebdo"></td>
                     <td><input type="int" id="Niv0" name="Niv"></td>
-                    <td>
+                    <td id="ligneInstru0">
                         <select name="Instru" id="Instru0">
                             <option value="Guitare">Guitare</option>
                             <option value="Batterie">Batterie</option>
@@ -37,13 +57,13 @@
                             <option value="Basse">Basse</option>
                         </select>
                     </td>
-                    <td>
+                    <td id="ligneVille0">
                         <select name="Ville" id="Ville0">
                             <option value="Angers">Angers</option>
                             <option value="Nantes">Nantes</option>
                         </select>
                     </td>
-                    <td>
+                    <td id="ligneStyles0">
                         <select name="Styles" id="Styles0" multiple>
                             <option value="Rock">Rock</option>
                             <option value="Metal">Metal</option>
@@ -62,11 +82,12 @@
                     <td><input type="int" id="Niv_Min0" name="Niv_Min"></td>
                     <td><input type="int" id="Niv_Max0" name="Niv_Max"></td>
                     <td><input type="int" id="Nb_Styles_Min0" name="Nb_Styles_Min"></td>
-                </tr>
+                </tr>-->
             </tbody>
         </table>
         <input type="button" value="Valider" onclick="parseInfo()">
         <input type="button" value="Ajouter ligne" onclick="ajoutLigne()">
     </form>
 </body>
+<script src="Projet.js"></script>
 </html> 
