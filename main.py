@@ -1,10 +1,10 @@
 import os
 import subprocess
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, request,render_template
 from flask import Flask
 import tempfile
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder=".")
 
 
 @app.route('/resolve', methods=['POST'])
@@ -20,6 +20,8 @@ def resolve():
 
     return child.stdout.read()
 
-
+@app.route('/')
+def main():
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run()
