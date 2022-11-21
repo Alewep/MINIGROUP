@@ -5,8 +5,9 @@ var listeVilles = ["Angers", "Nantes"];
 var listeStyles = ["Rock", "Metal", "Jazz", "Pop", "Classique", "Funk", "RnB", "Rap", "Electro", "Punk"];
 
 function ajoutInstru(){
-    let instru = document.getElementById("ajoutInstru").value;
-    listeInstru.push(instru);
+    let instru = document.getElementById("ajoutInstru");
+    listeInstru.push(instru.value);
+    instru.value = "";
    
     affichageInstru();
     ChangementTableauInstru();
@@ -59,9 +60,10 @@ function ChangementTableauInstru(){
 }
 
 function ajoutVille(){
-    let ville = document.getElementById("ajoutVille").value;
-    listeVilles.push(ville);
-   
+    let ville = document.getElementById("ajoutVille");
+    listeVilles.push(ville.value);
+    ville.value = "";
+
     affichageVille();
     ChangementTableauVille();
 }
@@ -113,8 +115,9 @@ function ChangementTableauVille(){
 }
 
 function ajoutStyles(){
-    let style = document.getElementById("ajoutStyles").value;
-    listeStyles.push(style);
+    let style = document.getElementById("ajoutStyles");
+    listeStyles.push(style.value);
+    style.value = "";
    
     affichageStyles();
     ChangementTableauStyles();
@@ -169,29 +172,29 @@ function ChangementTableauStyles(){
 
 function ajoutLigne(){
     
-    var tbody = document.getElementById("tbody");
+    let tbody = document.getElementById("tbody");
 
-    var tr = document.createElement('tr');
+    let tr = document.createElement('tr');
     tr.setAttribute("id", "ligne"+i);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    let td = document.createElement('td');
+    let input = document.createElement('input');
     input.setAttribute("type", "text");
     input.setAttribute("id", "Nom"+i);
     input.setAttribute("name", "Nom")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Nb_heures_hebdo"+i);
     input.setAttribute("name", "Nb_heures_hebdo")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Niv"+i);
     input.setAttribute("name", "Niv")
@@ -199,9 +202,9 @@ function ajoutLigne(){
     tr.append(td);
 
     /* Les instrments */
-    var td = document.createElement('td');
+    td = document.createElement('td');
     td.setAttribute("id", "ligneInstru"+i);
-    var select = document.createElement('select');
+    let select = document.createElement('select');
     select.setAttribute("id", "Instru"+i);
     select.setAttribute("name", "Instru");
     for(let j = 0; j < listeInstru.length; ++j){
@@ -214,9 +217,9 @@ function ajoutLigne(){
     tr.append(td);
 
     /* Les villes */
-    var td = document.createElement('td');
+    td = document.createElement('td');
     td.setAttribute("id", "ligneVille"+i)
-    var select = document.createElement('select');
+    select = document.createElement('select');
     select.setAttribute("id", "Ville"+i);
     select.setAttribute("name", "Ville");
     for(let j = 0; j < listeVilles.length; ++j){
@@ -229,9 +232,9 @@ function ajoutLigne(){
     tr.append(td);
 
     /* les styles */
-    var td = document.createElement('td');
+    td = document.createElement('td');
     td.setAttribute("id", "ligneStyles"+i);
-    var select = document.createElement('select');
+    select = document.createElement('select');
     select.setAttribute("id", "Styles"+i);
     select.setAttribute("name", "Styles");
     select.setAttribute("multiple", "true");
@@ -244,40 +247,40 @@ function ajoutLigne(){
     td.append(select);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Nb_H_Min"+i);
     input.setAttribute("name", "Nb_H_Min")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Nb_H_Max"+i);
     input.setAttribute("name", "Nb_H_Max")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Niv_Min"+i);
     input.setAttribute("name", "Niv_Min")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Niv_Max"+i);
     input.setAttribute("name", "Niv_max")
     td.append(input);
     tr.append(td);
 
-    var td = document.createElement('td');
-    var input = document.createElement('input');
+    td = document.createElement('td');
+    input = document.createElement('input');
     input.setAttribute("type", "int");
     input.setAttribute("id", "Nb_Styles_Min"+i);
     input.setAttribute("name", "Nb_Styles_Min")
