@@ -118,23 +118,33 @@ function parseInfo(){
     //console.log(les_styles);
 
     // String final pour transfert en dzn
-    var stringForDzn = stringNom + "\n" + stringInstrument + "\n" + stringVille + "\n" + stringStyle + "\n" + stringHeure + "\n" + stringNiveau + "\n" + nbStyleMin + "\n" + les_instruments + "\n" + les_villes + "\n" + heures_hebdo + "\n" + heures_min + "\n" + heures_max + "\n" + les_niveaux + "\n" + niveau_min + "\n" + niveau_max + "\n" + les_styles;
+    var stringForDzn = stringNom + stringInstrument + stringVille + stringStyle + stringHeure + stringNiveau + nbStyleMin + les_instruments + les_villes + heures_hebdo + heures_min + heures_max + les_niveaux + niveau_min + niveau_max + les_styles;
     console.log(stringForDzn);
+
     /*
-    $.post("http://127.0.0.1:5000/resolve",
-    {
-        data: {"data" : stringForDzn}
+    let data = {
+        "javascript_data" : stringForDzn
     }
-    );
-    */
-    $(document).ready(function(){
-        $.post("http://127.0.0.1:5000/resolve/",
-        {
-            data: {data : stringForDzn}
-        }
-        );
-    });
     
+    let options = {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    }
+    
+    let fetchRes = fetch("/resolve", options);
+    fetchRes.then(res => res.json()).then(d => {console.log(d)})
+    */
+
+    
+    
+    $.post("/resolve",
+    {
+        //data: {"data" : stringForDzn}
+        javascript_data: stringForDzn
+    }
+    )
+ 
 }
 
 // Transformer valeur d'un tableau en ensemble
@@ -166,7 +176,7 @@ function tabToEnsAllDifferent(nomEns, table){
 
 // Créer variable numérique
 function tabToNumber(nomVar, table){
-    var max = 5;
+    var max = 10;
 
     for (var i=0; i<table.length; i++){
         var value = parseInt(table[i]);
