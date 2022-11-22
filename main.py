@@ -1,6 +1,6 @@
 import os
 import subprocess
-from flask import Flask, redirect, url_for, request,render_template
+from flask import Flask, redirect, url_for, request,render_template, jsonify
 from flask import Flask
 from flask_cors import CORS, cross_origin
 import tempfile
@@ -23,17 +23,14 @@ def resolve():
     child.wait()
     os.remove(temp_file.name)
 
-    print(child.stdout.read())
-
-    return child.stdout.read()
-
-@app.route('/getresult/<jsdata>')
-def get_javascript_data(jsdata):
-    return jsdata
+    response = child.stdout.read()
+    print(response)
+    return str(response).replace("\\n","\n")
 
 @app.route('/')
 @cross_origin()
 def main():
     return render_template('web/index.html')
+
 if __name__ == '__main__':
     app.run()

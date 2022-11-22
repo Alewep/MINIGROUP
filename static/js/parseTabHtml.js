@@ -40,20 +40,6 @@ function parseInfo(){
             tab_nb_styles_min.push(document.getElementById("Nb_Styles_Min"+i).value);
     }
 
-    /*
-    console.log(tab_nom);
-    console.log(tab_heure_hebdo);
-    console.log(tab_niveau);
-    console.log(tab_instrument);
-    console.log(tab_ville);
-    console.log(tab_styles);
-    console.log(tab_nb_h_min);
-    console.log(tab_nb_h_max);
-    console.log(tab_niv_min);
-    console.log(tab_niv_max);
-    console.log(tab_nb_styles_min);
-    */
-
     // Ensemble des noms
     var stringNom = tabToEns("nom", tab_nom);
     //console.log(stringNom);
@@ -121,30 +107,22 @@ function parseInfo(){
     var stringForDzn = stringNom + stringInstrument + stringVille + stringStyle + stringHeure + stringNiveau + nbStyleMin + les_instruments + les_villes + heures_hebdo + heures_min + heures_max + les_niveaux + niveau_min + niveau_max + les_styles;
     console.log(stringForDzn);
 
-    /*
-    let data = {
-        "javascript_data" : stringForDzn
-    }
-    
-    let options = {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-    }
-    
-    let fetchRes = fetch("/resolve", options);
-    fetchRes.then(res => res.json()).then(d => {console.log(d)})
-    */
+    data = { javascript_data: stringForDzn };
 
-    
-    
-    $.post("/resolve",
-    {
-        //data: {"data" : stringForDzn}
-        javascript_data: stringForDzn
-    }
-    )
- 
+    $.ajax({
+        url: "/resolve",
+        method: "POST",
+        data : data
+    }).done(function (data) {
+        document.getElementById("resultat").remove();
+        var tag = document.createElement("p");
+        tag.id = "resultat"
+        var text = document.createTextNode(data);
+        tag.appendChild(text);
+        var element = document.getElementById("response");
+        element.appendChild(tag);
+        console.log(data)
+    });
 }
 
 // Transformer valeur d'un tableau en ensemble
