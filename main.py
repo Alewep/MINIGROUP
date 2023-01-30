@@ -1,3 +1,5 @@
+# FLASK_APP=main.py FLASK_DEBUG=1 flask run
+
 import os
 import subprocess
 from flask import Flask, redirect, url_for, request,render_template, jsonify
@@ -25,7 +27,7 @@ def resolve():
 
     response = child.stdout.read()
     print(response)
-    return str(response).replace("\\n","\n")
+    return str(response).replace("\\n","|----|")
 
 @app.route('/')
 @cross_origin()
