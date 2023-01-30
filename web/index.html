@@ -1,0 +1,89 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>We are m(usicians) and we play rock n’ roll !</title>
+<script src="./static/parseTabHtml.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js" integrity="sha512-SGWgwwRA8xZgEoKiex3UubkSkV1zSE1BS6O4pXcaxcNtUlQsOmOmhVnDwIvqGRfEmuz83tIGL13cXMZn6upPyg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <table id="tableauListe">
+        <tr id="ligneInstru">
+            <th>Ajout instrument:</th>
+            <td><input type="text" id="ajoutInstru" name="ajoutInstru"></td>
+            <td><input type="button" value="Ajouter instrument" onclick="ajoutInstru()"></button></td>
+            <td id="Instru"> <!-- Liste des Instruments disponible --> </td>
+        </tr>
+        <tr id="ligneVille">
+            <th>Ajout ville:</th>
+            <td><input type="text" id="ajoutVille" name="ajoutVille"></td>
+            <td><input type="button" value="Ajouter ville" onclick="ajoutVille()"></button></td>
+            <td id="Villes"> <!-- Liste des villes disponible --> </td>
+        </tr>
+        <tr id="ligneStyles">
+            <th>Ajout style:</th>
+            <td><input type="text" id="ajoutStyles" name="ajoutStyles"></td>
+            <td><input type="button" value="Ajouter style" onclick="ajoutStyles()"></button></td>
+            <td id="Styles"> <!-- Liste des styles disponible --> </td>
+        </tr>
+    </table>
+    <br><br><br>
+    <form>
+        <table id="Table" border="1">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nb heures hebdo</th>
+                    <th>Niv.</th>
+                    <th>Instru.</th>
+                    <th>Ville</th>
+                    <th>Styles</th>
+                    <th>Nb h Min</th>
+                    <th>Nb h Max</th>
+                    <th>Niv. Min</th>
+                    <th>Niv. Max</th>
+                    <th>Nb Styles Min</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!-- Tableau -->
+            </tbody>
+        </table>
+        <input type="button" value="Valider" onclick="parseInfo()">
+        <input type="button" value="Ajouter ligne" onclick="ajoutLigne()">
+        <br><br>
+        <label>Choisir un fichier csv</label>
+        <input type="file" id="file-selectorCSV" name="file-selector" accept="text/csv">
+        <script>
+            const file_selectorCSV = document.getElementById('file-selectorCSV');
+            file_selectorCSV.addEventListener('change', (event) => {
+                $('#file-selectorCSV').parse({
+                    config: {
+                        delimiter: ";",
+                        complete: ImportationCSV,
+                    },
+                    before: function(file, inputElem)
+                    {
+                        console.log("Parsing file...", file);
+                    },
+                    error: function(err, file)
+                    {
+                        console.log("ERROR:", err, file);
+                    },
+                    complete: function()
+                    {
+                        console.log("Done with all files");
+                    }
+                });
+            });
+        </script>
+        <br><br>
+        <label>Choisir un fichier dzn</label>
+        <input type="file" id="file-selectorDZN" name="file-selector" accept=".dzn" onchange="ImportationDZN(this.files[0])">
+    </form>
+    <div id="response">
+        <p id="resultat"></p>
+    </div>
+</body>
+<script src="./static/Projet.js"></script>
+</html> 
