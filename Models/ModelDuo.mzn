@@ -2,18 +2,18 @@ enum nom;
 enum instrument;
 enum ville;
 enum styles;
-set of int: heures;
-set of int: niveau;
-array[nom] of int: nbStyleMin;
+
 array[nom] of instrument: les_instruments;
 array[nom] of ville: les_villes;
-array[nom] of heures: heures_hebdo;
-array[nom] of heures: heures_min;
-array[nom] of heures: heures_max;
 array[nom] of var set of styles : les_styles;
-array[nom] of niveau: les_niveaux;
-array[nom] of niveau: niveau_min;
-array[nom] of niveau: niveau_max;
+
+array[nom] of int: nbStyleMin;
+array[nom] of int: heures_hebdo;
+array[nom] of int: heures_min;
+array[nom] of int: heures_max;
+array[nom] of int: les_niveaux;
+array[nom] of int: niveau_min;
+array[nom] of int: niveau_max;
 
 
 

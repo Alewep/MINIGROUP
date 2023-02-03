@@ -2,19 +2,16 @@
 
 import os
 import subprocess
-from flask import Flask, redirect, url_for, request,render_template, jsonify
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 from flask import Flask
-from flask_cors import CORS, cross_origin
 import tempfile
 import json
 
-app = Flask(__name__,template_folder=".", static_folder="web/static")
-cors = CORS(app)
+app = Flask(__name__, template_folder=".", static_folder="web/static")
 app.config['CORS_HEADER'] = 'Content-Type'
 
 
 @app.route('/resolve', methods=['POST'])
-@cross_origin()
 def resolve():
     temp_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".dzn", delete=False)
     temp_file.write(request.form['javascript_data'])
@@ -27,12 +24,13 @@ def resolve():
 
     response = child.stdout.read()
     print(response)
-    return str(response).replace("\\n","|----|")
+    return str(response).replace("\\n", "|----|")
+
 
 @app.route('/')
-@cross_origin()
 def main():
     return render_template('web/index.html')
+
 
 if __name__ == '__main__':
     app.run()

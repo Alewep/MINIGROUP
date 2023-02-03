@@ -1,18 +1,19 @@
 function parseInfo(){
-    var table = document.getElementById("Table");
-    var lignes = table.getElementsByTagName("tr");
 
-    var tab_nom = [];
-    var tab_heure_hebdo = [];
-    var tab_niveau = [];
-    var tab_instrument = [];
-    var tab_ville = [];
-    var tab_styles = [];
-    var tab_nb_h_min = [];
-    var tab_nb_h_max = [];
-    var tab_niv_min = [];
-    var tab_niv_max = [];
-    var tab_nb_styles_min = [];
+    const table = document.getElementById("Table");
+    const lignes = table.getElementsByTagName("tr");
+
+    let tab_nom = [];
+    let tab_heure_hebdo = [];
+    let tab_niveau = [];
+    let tab_instrument = [];
+    let tab_ville = [];
+    let tab_styles = [];
+    let tab_nb_h_min = [];
+    let tab_nb_h_max = [];
+    let tab_niv_min = [];
+    let tab_niv_max = [];
+    let tab_nb_styles_min = [];
 
     for (var i=0; i<lignes.length-1; i++){
             tab_nom.push(document.getElementById("Nom"+i).value);
@@ -20,9 +21,9 @@ function parseInfo(){
             tab_niveau.push(document.getElementById("Niv"+i).value);
             tab_instrument.push(document.getElementById("Instru"+i).value);
             tab_ville.push(document.getElementById("Ville"+i).value);
-            //tab_styles.push(document.getElementById("Styles"+i).options);
-            var stringStyle = "styles = {";
-            var aux = [];
+
+            let stringStyle = "styles = {";
+            let aux = [];
             for (var option of document.getElementById("Styles"+i).options)
             {
                 if (option.selected) {
@@ -55,14 +56,6 @@ function parseInfo(){
     // Ensemble des styles
     //console.log(stringStyle);
 
-    // Gamme des heures
-    var stringHeure = tabToNumber("heures", tab_heure_hebdo);
-    //console.log(stringHeure);
-
-    // Gamme des niveaux
-    var stringNiveau = tabToNumber("niveau", tab_niveau);
-    //console.log(stringNiveau);
-
     // nbStyleMin
     var nbStyleMin = tabToValue("nbStyleMin", tab_nb_styles_min);
     //console.log(nbStyleMin);
@@ -77,34 +70,32 @@ function parseInfo(){
 
     // heures_hebdo
     var heures_hebdo = tabToValue("heures_hebdo", tab_heure_hebdo);
-    //console.log(heures_hebdo);
 
     // heures_min
     var heures_min = tabToValue("heures_min", tab_nb_h_min);
-    //console.log(heures_min);
 
     // heures_min
     var heures_max = tabToValue("heures_max", tab_nb_h_max);
-    //console.log(heures_max);
+
 
     // les_niveaux
     var les_niveaux = tabToValue("les_niveaux", tab_niveau);
-    //console.log(les_niveaux);
+
 
     // niveau_min
     var niveau_min = tabToValue("niveau_min", tab_niv_min);
-    //console.log(niveau_min);
+
 
     // niveau_max
     var niveau_max = tabToValue("niveau_max", tab_niv_max);
-    //console.log(niveau_max);
+
 
     // les_styles
     var les_styles = tabToStringStyle(tab_styles);
-    //console.log(les_styles);
+
 
     // String final pour transfert en dzn
-    var stringForDzn = stringNom + stringInstrument + stringVille + stringStyle + stringHeure + stringNiveau + nbStyleMin + les_instruments + les_villes + heures_hebdo + heures_min + heures_max + les_niveaux + niveau_min + niveau_max + les_styles;
+    var stringForDzn = stringNom + stringInstrument + stringVille + stringStyle + nbStyleMin + les_instruments + les_villes + heures_hebdo + heures_min + heures_max + les_niveaux + niveau_min + niveau_max + les_styles;
     console.log(stringForDzn);
 
     data = { javascript_data: stringForDzn };
@@ -152,19 +143,7 @@ function tabToEnsAllDifferent(nomEns, table){
     return tabToEns(nomEns, auxTab);
 }
 
-// Créer variable numérique
-function tabToNumber(nomVar, table){
-    var max = 10;
 
-    for (var i=0; i<table.length; i++){
-        var value = parseInt(table[i]);
-        if (value > max){
-            max = value;
-        }
-    }
-
-    return nomVar+" = 0.."+max+";";
-}
 
 // Créer données 
 function tabToValue(nomVal, table){
