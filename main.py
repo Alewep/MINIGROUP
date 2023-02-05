@@ -15,7 +15,6 @@ PATH_FOLDER = "Models"
 models_parse = {}
 for model_name in os.listdir(PATH_FOLDER):
     models_parse[model_name] = tools.parse_mzn(os.path.join(PATH_FOLDER, model_name))
-print(json.dumps(models_parse, indent=4))
 
 
 @app.route('/models', methods=['GET'])
@@ -45,7 +44,8 @@ def model(model_name):
 def resolve():
     model_name = request.json['model_name']
     data = request.json['data']
-
+    constraints = request.json['constraints']
+    print(constraints)
     path_model = f"Models/{model_name}"
 
     # test if the model exist
@@ -60,10 +60,8 @@ def resolve():
 
     # create a new .mzn temp file
     temp_file_mzn = tempfile.NamedTemporaryFile(mode="w+", suffix=".mzn", delete=False)
-    temp_file_mzn.write(tools.to_mzn(models_parse[model_name], []))
+    temp_file_mzn.write(tools.to_mzn(models_parse[model_name], constraints))
     temp_file_mzn.close()
-
-    print(tools.to_mzn(models_parse[model_name], []))
 
     # call mizinc command
     child = subprocess.Popen(["minizinc", "--solver", "gecode", temp_file_dzn.name, temp_file_mzn.name],
@@ -76,6 +74,8 @@ def resolve():
     # get the output and do traitement to get a validated json format
 
     response = child.stdout.read()
+
+    print(response)
     response = response.decode("utf-8")
 
     if "Error" in response:

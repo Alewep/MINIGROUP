@@ -32,7 +32,6 @@ def parse_mzn(path_file):
     data["constraints"] = []
 
     for i, c in enumerate(constraints):
-        print(c.encode("utf-8"))
         comment = f"Contrainte {i}"
         activated = True
         if c.startswith("%"):

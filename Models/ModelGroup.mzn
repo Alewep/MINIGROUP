@@ -1,4 +1,7 @@
 %#n
+
+
+
 enum nom;
 enum instrument;
 enum ville;
@@ -15,6 +18,7 @@ array[nom] of int: heures_max;
 array[nom] of int: les_niveaux;
 array[nom] of int: niveau_min;
 array[nom] of int: niveau_max;
+
 
 int:size=3;
 
@@ -58,10 +62,10 @@ solve minimize sum(n1 in nom,n2 in group[n1]) (abs(les_niveaux[n1] - les_niveaux
                 
 
 output["{"];
-output 
-[
-  "\"\(nom[p])\":\"\(group[nom[p]])\","
+output(
+[ 
+  "\"\(nom[p])\""++":"++"\([ show(n) | n in fix(group[nom[p]])])"++","
   | p in 1..length(nom)-1
-];
-output["\"\(nom[length(nom)])\":\"\(group[nom[length(nom)]])\""];
+]);
+output["\"\(nom[length(nom)])\""++":"++"\([ show(n) | n in fix(group[nom[length(nom)]])])"];
 output["}"];

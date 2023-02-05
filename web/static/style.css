@@ -41,19 +41,28 @@ input[type="number"]{
   width: 50px;
 }
 
-input[type="submit"] {
-  width: 100%;
+#data input[type="submit"] {
+  display: block;
+  width: 50%;
+  height: 100px;
   padding: 10px;
   border-radius: 5px;
   background-color: #00d1b2;
   border: none;
   color: #ffffff;
   cursor: pointer;
+  margin-left: 25%;
+  font-size: xx-large;
 }
 
 #enumList input[type="submit"] {
   width: 200px;
-
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #00d1b2;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 #enumList input[type="button"] {
@@ -121,4 +130,20 @@ th {
   border: none;
   color: #ffffff;
   cursor: pointer;
+}
+
+section#solution {
+ border: 3px solid white;
+}
+
+#unsatisfied {
+
+  border-radius: 5px;
+  background-color: red;
+  text-align: center;
+  width: 30%;
+  padding: 50px;
+  margin-left: 33%;
+
+  font-size: 50px;
 }

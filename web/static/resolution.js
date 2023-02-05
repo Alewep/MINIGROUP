@@ -1,4 +1,45 @@
+function getCheckboxValues() {
+    let checkboxes = document.querySelectorAll('#constraint input[type="checkbox"]');
+    alert(checkboxes)
+    console.log(checkboxes)
+    checkboxes = Array.from(checkboxes).sort(x => x.value)
+    let values = [];
+    for (let check of checkboxes) {
+      values.push(check);
+    }
+    return values;
+}
 
+function createTable(data) {
+    // Créer le tableau HTML
+    console.log(data)
+    let table = document.createElement("table");
+  
+    // Pour chaque clé dans l'objet
+    for (let key in data) {
+      // Créer une ligne pour chaque clé
+      let row = document.createElement("tr");
+  
+      // Créer la première cellule pour le nom de la clé
+      let cell1 = document.createElement("td");
+      let cell1Text = document.createTextNode(key);
+      cell1.appendChild(cell1Text);
+      row.appendChild(cell1);
+  
+      // Créer la deuxième cellule pour la liste associée à la clé
+      let cell2 = document.createElement("td");
+      console.log(data[key])
+      let cell2Text = document.createTextNode(data[key].join(", "));
+      cell2.appendChild(cell2Text);
+      row.appendChild(cell2);
+  
+      // Ajouter la ligne au tableau
+      table.appendChild(row);
+    }
+  
+    return table
+}
+  
 
 function parseArray() {
     data = {}
@@ -51,15 +92,7 @@ function parseArray() {
     return data
 }
 
-const form = document.querySelector("#data > form");
-
-form.addEventListener("submit",function(e){
-    
-    e.preventDefault();
-    
-    data = parseArray();
-
-    // create dzn file
+function createDzn(data) {
     dzn = ""
     for (let key in data){
 
@@ -80,10 +113,22 @@ form.addEventListener("submit",function(e){
         }
     
     }
+    return dzn
+    
+}
+
+const form = document.querySelector("#data > form");
+const solution = document.querySelector("#solution")
+const select_name = document.querySelector("#model select")
+
+form.addEventListener("submit",function(e){
+    
+    e.preventDefault();
+
+    dzn = createDzn(parseArray())
+
     if (dzn === "")
         return 
-
-
     // do the request 
     fetch('/resolve', 
     {
@@ -91,14 +136,27 @@ form.addEventListener("submit",function(e){
         headers: {
             "Content-Type": "application/json;charset=UTF-8"
         },
-        body: JSON.stringify({ "data": dzn,"model_name": "ModelDuo.mzn" })
+        body: JSON.stringify({ "data": dzn,"model_name": select_name.value, "constraints":getCheckboxValues()})
     })
     .then(response => response.json())
     .then(function(data) {
         let error = data["error"];
         if (error != undefined) alert(error);
         else {
-            
+            if(data["statisfiable"]) {
+
+                solution.appendChild(createTable(data["solution"]))
+
+            }
+            else {
+
+                let msg_unsatisfied = document.createElement("p");
+                msg_unsatisfied.id = "unsatisfied";
+                msg_unsatisfied.textContent = "Unsatisfied";
+
+                solution.appendChild(msg_unsatisfied);
+            }
+
         }
         
     })
