@@ -1,0 +1,124 @@
+body {
+  background-color: #3b3b3b;
+  color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  margin-top: 50px;
+}
+
+section {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 25px ;
+  
+}
+
+section#model > div#constraint{
+  border: 1px solid white;
+  margin:50px;
+}
+
+label, input[type="text"], input[type="submit"] {
+  font-size: medium;
+  color: #ffffff;
+  margin: 10px;
+}
+
+input[type="text"],input[type="number"],select {
+  width: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #474747;
+  color: #ffffff;
+}
+
+input[type="number"]{
+  width: 50px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #00d1b2;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#enumList input[type="submit"] {
+  width: 200px;
+
+}
+
+#enumList input[type="button"] {
+  width: auto;
+  border:none;
+  color: white;
+  background: #888888;
+  margin: 5px;
+
+}
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 50px;
+}
+
+th, td {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  font-size:small;
+  color: #ffffff;
+}
+
+th {
+  background-color: #00d1b2;
+}
+
+#addLine{
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color:  #52be80;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: xx-large;
+  text-align: center;
+}
+
+#data input[name="delete"]{
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: red;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: large;
+  text-align: center;
+
+}
+
+#file-selectorDZN::file-selector-button,#file-selectorDZN {
+  width: 200;
+  padding: 10px;
+  border-radius: 5px;
+  background-color:#a569bd;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}

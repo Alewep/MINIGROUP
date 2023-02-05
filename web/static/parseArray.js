@@ -1,3 +1,5 @@
+
+
 function parseArray() {
     data = {}
     const lignes =  document.querySelectorAll("#tableDonnees > tbody > tr");
@@ -14,7 +16,6 @@ function parseArray() {
         }
 
         let selects = ligne.querySelectorAll("td > select")
-        console.log(selects)
         for(let select of selects){
             let name = select.getAttribute("name");
             values = []
@@ -50,10 +51,15 @@ function parseArray() {
     return data
 }
 
-const form = document.getElementById("donnees");
+const form = document.querySelector("#data > form");
 
-form.addEventListener("click",function(e){
+form.addEventListener("submit",function(e){
+    
+    e.preventDefault();
+    
     data = parseArray();
+
+    // create dzn file
     dzn = ""
     for (let key in data){
 
@@ -72,9 +78,29 @@ form.addEventListener("click",function(e){
         else {
             dzn += `${key} = [${data[key]}]; \n`;
         }
+    
     }
+    if (dzn === "")
+        return 
 
-    console.log(dzn);
-   
 
-})
+    // do the request 
+    fetch('/resolve', 
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8"
+        },
+        body: JSON.stringify({ "data": dzn,"model_name": "ModelDuo.mzn" })
+    })
+    .then(response => response.json())
+    .then(function(data) {
+        let error = data["error"];
+        if (error != undefined) alert(error);
+        else {
+            
+        }
+        
+    })
+    .catch(function(e) {alert(e)});
+});

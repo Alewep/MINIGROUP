@@ -2,13 +2,33 @@
 <html>
 <head>
 <title>We are m(usicians) and we play rock n’ roll !</title>
+<script src="./static/dzn-tools.js"></script>
+<link rel="stylesheet" type="text/css" href="./static/style.css">
 <script type="module" src="./static/arrayData.js" defer ></script>
 <script src="./static/parseArray.js" defer></script>
-<script src="./static/dzn-tools.js"></script>
+<script src="./static/chooseModel.js" defer></script>
+
+<source>
 </head>
 <body>
     <h1>We are m(usicians) and we play rock n’ roll !</h1>
-    <div id="enumList">
+    <section id="model">
+        <label>Model:</label>
+        <select>
+            <option disabled selected value> -- select a model -- </option>
+        </select>
+        <label>Size :</label><input type="number" name="size" disabled/>
+        <div id="constraint"></div>
+    </section>
+
+    
+    <section id="file">
+        <label>Choisir un fichier dzn</label>
+        <input type="file" id="file-selectorDZN" name="file-selector" accept=".dzn" />
+    </section>
+
+
+    <section id="enumList">
         <form id="instrument">
             <label for="instrument"><strong> Ajout instrument:</strong></label>
             <input type="text" name="instrument" pattern="[a-zA-Z_][a-zA-Z0-9_]*" required/>
@@ -29,37 +49,40 @@
             <input type="submit" value="Ajouter style" />
             <span class="buttonList"> <!-- Liste des styles disponible --> </span>
         </form>
-    </div>
-    <br><br><br>
-    <form id="donnees">
-        <table id="tableDonnees" border="1">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nom</th>
-                    <th>Nb heures hebdo</th>
-                    <th>Niv.</th>
-                    <th>Instru.</th>
-                    <th>Ville</th>
-                    <th>Styles</th>
-                    <th>Nb h Min</th>
-                    <th>Nb h Max</th>
-                    <th>Niv. Min</th>
-                    <th>Niv. Max</th>
-                    <th>Nb Styles Min</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Tableau -->
-            </tbody>
-        </table>
-        <input type="button" value="Ajouter ligne" id="addLine">
-        <input type="submit" value="Resolution" id="resolve">
-    
-        <br><br>
-        <label>Choisir un fichier dzn</label>
-        <input type="file" id="file-selectorDZN" name="file-selector" accept=".dzn" />
-    </form>
+    </section>
+
+    <section id="data">
+        <form >
+            <table id="tableDonnees" border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Nb heures hebdo</th>
+                        <th>Niv.</th>
+                        <th>Instru.</th>
+                        <th>Ville</th>
+                        <th>Styles</th>
+                        <th>Nb h Min</th>
+                        <th>Nb h Max</th>
+                        <th>Niv. Min</th>
+                        <th>Niv. Max</th>
+                        <th>Nb Styles Min</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Tableau -->
+                </tbody>
+            </table>
+            <input type="button" value="+" id="addLine">
+            <input type="submit" value="Resolution" id="resolve">
+        
+        </form>
+    </section>
+
+    <section id="solution">
+        <table></table>
+    </section>
 
 </body>
 </html> 

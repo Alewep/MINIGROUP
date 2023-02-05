@@ -48,7 +48,6 @@ function generate_line(){
 
             
             let select_name = "les_"+list.parentNode.id+"s";
-            console.log(select_name)
             const select = line.querySelector(`tr > td > select[name=${select_name}]`);
             
             let option = document.createElement("option");
@@ -159,7 +158,6 @@ fileDznSelector.addEventListener("change", function(e){
         eraseList();
 
         let obj = parseDzn(this.result);
-        console.log(obj)
         if (obj['nom'] !== undefined){
             for(let i=0;i<obj['nom'].length;++i){
                 arrayData.appendChild(generate_line());
@@ -202,7 +200,6 @@ fileDznSelector.addEventListener("change", function(e){
                     
                         if(cells[i] === undefined)
                             break
-                        console.log(cells[i],value)
                         cells[i].value = value; 
                         ++i;
                     }

@@ -1,11 +1,12 @@
+%#2
 enum nom;
 enum instrument;
 enum ville;
-enum styles;
+enum style;
 
 array[nom] of instrument: les_instruments;
 array[nom] of ville: les_villes;
-array[nom] of var set of styles : les_styles;
+array[nom] of var set of style : les_styles;
 
 array[nom] of int: nbStyleMin;
 array[nom] of int: heures_hebdo;
@@ -20,37 +21,41 @@ array[nom] of int: niveau_max;
 
 array[nom] of var nom: duo;
 
-% Pas la même ville
+%Les deux musiciens doivent habiter la même ville
 constraint
   forall(m in nom) (les_villes[m] == les_villes[duo[m]]);
   
-% Nombre d'heure
+%Le nombre d’heures voulues doit être dans le créneau Min - Max souhaité par l’autre
 constraint
   forall(m in nom) ((heures_hebdo[m] >= heures_min[duo[m]] /\ heures_hebdo[m] <= heures_max[duo[m]])
                 /\ (heures_hebdo[duo[m]] >= heures_min[m] /\ heures_hebdo[duo[m]] <= heures_max[m]));
                 
-% Style
+%Le nombre de style commun doit respecter les exigences de chacun
 constraint 
   forall(m in nom)(card(les_styles[m] intersect les_styles[duo[m]]) >= nbStyleMin[m]);
   
-% Pas le même instruments
+%Deux musiciens jouant du même instrument ne peuvent former un duo
 constraint 
   forall(m in nom) (les_instruments[m] != les_instruments[duo[m]]); 
   
-% Niveau
+%Le niveau de chaque musicien du duo doit être dans l’intervalle de niveau accepté par l’autre musicien
 constraint
   forall(m in nom) ((les_niveaux[m] >= niveau_min[duo[m]] /\ les_niveaux[m] <= niveau_max[duo[m]])
                 /\ (les_niveaux[duo[m]] >= niveau_min[m] /\ les_niveaux[duo[m]] <= niveau_max[m]));
                 
-% Consistant
+%Le duo est consistant
 constraint
   forall(m, n in nom) (duo[m] == n -> duo[n] == m);
 
 solve satisfy;
 
+
+% display in json format
+output["{"];
 output 
 [
-  "\(p) -> \(duo[p])\n" 
-  | p in nom
-]
-;
+  "\"\(nom[p])\":\"\(duo[nom[p]])\","
+  | p in 1..length(nom)-1
+];
+output["\"\(nom[length(nom)])\":\"\(duo[nom[length(nom)]])\""];
+output["}"];

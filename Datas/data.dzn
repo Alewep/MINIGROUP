@@ -1,9 +1,7 @@
 nom = {Alex,Billie,Chris,Dora,Emile,Franck,Gisele,Horst,Iris,Jean,Karl,Lisa};
 instrument = {Guitare,Batterie,Violon,Piano,Basse};
 ville = {Angers,Nantes};
-styles = {Rock,Metal,Jazz,Pop,Classique,Funk,RnB,Rap,Electro,Punk};
-heures = 0..10;
-niveau = 0..5;
+style = {Rock, Metal, Jazz, Pop, Classique, Funk, RnB, Rap, Electro, Punk};
 
 nbStyleMin = [2,3,1,1,2,2,1,1,1,1,2,1];
 les_instruments = [Guitare,Batterie,Guitare,Batterie,Violon,Guitare,Piano,Violon,Piano,Piano,Basse,Basse];
@@ -15,7 +13,7 @@ heures_max = [4,5,2,4,6,5,5,3,3,5,5,6];
 
 les_styles =[
   {Rock,Metal,Jazz},
-  {Jazz,Pop,Classique,Rock,Funk},
+  {Jazz,Pop,Classique, Rock, Funk},
   {RnB,Rap,Classique},
   {Pop,Punk,Electro},
   {Classique,Metal,Jazz},
