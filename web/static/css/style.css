@@ -148,3 +148,27 @@ section#solution td {
   font-size: 50px;
 }
 
+#exemples{
+  display: inline-flex;
+  margin: 10px;
+
+}
+
+a:link {
+  color:  #a569bd;
+}
+
+/* visited link */
+a:visited {
+  color: #a569bd;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}

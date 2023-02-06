@@ -20,7 +20,7 @@ array[nom] of int: niveau_min;
 array[nom] of int: niveau_max;
 
 
-int:size=3;
+int:size;
 
 array[nom] of var set of nom: group;
 

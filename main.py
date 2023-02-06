@@ -10,7 +10,7 @@ import tools
 
 app = Flask(__name__, template_folder=".", static_folder="web/static")
 
-PATH_FOLDER = "Models"
+PATH_FOLDER = "web/static/Minizinc/Models"
 DEFAULT_MODEL = "ModelDuo.mzn"
 
 models_parse = {}
@@ -33,7 +33,7 @@ def models():
 @app.route('/model/', defaults={'model_name': DEFAULT_MODEL})
 @app.route('/model/<model_name>', methods=['GET'])
 def model(model_name):
-    path_model = f"Models/{model_name}"
+    path_model = f"web/static/Minizinc/Models/{model_name}"
     print(path_model)
     print(model_name in models_parse)
     if model_name in models_parse:
@@ -45,15 +45,20 @@ def model(model_name):
 
 @app.route('/resolve', methods=['POST'])
 def resolve():
+    print(request.json)
     model_name = request.json['model_name']
     data = request.json['data']
     constraints = request.json['constraints']
+    size = request.json["size"]
 
     print(constraints)
 
     # test if the model exist
     if not models_parse:
         return {"error": f"model {model_name} doesn't exist"}, 406
+
+    if models_parse[model_name]["size"] == "n":
+        data += f"\nsize={size};"
 
     # create a new .dzn temp file
     temp_file_dzn = tempfile.NamedTemporaryFile(mode="w+", suffix=".dzn", delete=False)

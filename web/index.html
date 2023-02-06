@@ -2,11 +2,11 @@
 <html>
 <head>
 <title>We are m(usicians) and we play rock n’ roll !</title>
-<script src="./static/dzn-tools.js"></script>
-<link rel="stylesheet" type="text/css" href="./static/style.css">
-<script type="module" src="./static/arrayData.js" defer ></script>
-<script src="./static/resolution.js" defer></script>
-<script src="./static/chooseModel.js" defer></script>
+<script src="./static/js/dzn-tools.js"></script>
+<link rel="stylesheet" type="text/css" href="./static/css/style.css">
+<script type="module" src="./static/js/arrayData.js" defer ></script>
+<script src="./static/js/resolution.js" defer></script>
+<script src="./static/js/chooseModel.js" defer></script>
 
 <source>
 </head>
@@ -24,6 +24,15 @@
     <section id="file">
         <label>Choisir un fichier dzn</label>
         <input type="file" id="file-selectorDZN" name="file-selector" accept=".dzn" />
+
+        <div id="exemples">
+            <p>Fichier d'exemples :</p>
+            <ul>
+                <li><a href="/static/Minizinc/Datas/data.dzn">exemple 1</a></li>
+                <li><a href="/static/Minizinc/Datas/data_trio.dzn">exemple 2</a></li>
+            </ul>
+        </div>
+
     </section>
 
 

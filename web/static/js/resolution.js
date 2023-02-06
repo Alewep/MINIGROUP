@@ -124,6 +124,7 @@ function createDzn(data) {
 const form = document.querySelector("#data > form");
 const solution = document.querySelector("#solution")
 const select_name = document.querySelector("#model select")
+const num = document.querySelector("#model input[type=number]")
 
 form.addEventListener("submit",function(e){
     
@@ -141,7 +142,10 @@ form.addEventListener("submit",function(e){
         headers: {
             "Content-Type": "application/json;charset=UTF-8"
         },
-        body: JSON.stringify({ "data": dzn,"model_name": select_name.value, "constraints":getCheckboxValues()})
+        body: JSON.stringify({ "data": dzn,
+        "model_name": select_name.value, 
+        "constraints":getCheckboxValues(),
+        "size":num.value})
     })
     .then(response => response.json())
     .then(function(data) {

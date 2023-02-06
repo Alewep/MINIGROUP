@@ -3,7 +3,7 @@ import './dzn-tools.js';
 // Loading of line model for the array
 
 let line_model;
-fetch("./static/line.html")
+fetch("./static/html/line.html")
     .then((response) => response.text())
     .then((html) => {
         line_model = document.createElement("tr");
