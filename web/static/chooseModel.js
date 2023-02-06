@@ -7,6 +7,7 @@ const constraints = document.querySelector("#model > #constraint")
 fetch('/models')
   .then((response) => response.json())
   .then(function(data){
+    console.log(data)
     for(let model of data['models']){
         let option = document.createElement('option');
         option.value = model['name']
@@ -20,15 +21,16 @@ fetch('/models')
   });
 
 
-select_model.addEventListener('change',function(e){
+
+function load_model(e){
+
   while (constraints.hasChildNodes()) {
     constraints.removeChild(constraints.lastChild);
   }
-
-
-  fetch(`/model/${e.target.value}`)
+  fetch(`/model/${select_model.value}`)
   .then((response) => response.json())
   .then(function(data){
+    console.log(data)
     if(data["size"] == "n"){
       input_model.value = 2;
       input_model.disabled = false;
@@ -59,6 +61,8 @@ select_model.addEventListener('change',function(e){
       constraints.appendChild(document.createElement("br"));
     }
 
-  });
+  })
+}
 
-})
+select_model.addEventListener('change',load_model);
+window.addEventListener('load',load_model);

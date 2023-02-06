@@ -11,33 +11,36 @@ import tools
 app = Flask(__name__, template_folder=".", static_folder="web/static")
 
 PATH_FOLDER = "Models"
+DEFAULT_MODEL = "ModelDuo.mzn"
 
 models_parse = {}
 for model_name in os.listdir(PATH_FOLDER):
     models_parse[model_name] = tools.parse_mzn(os.path.join(PATH_FOLDER, model_name))
 
 
-@app.route('/models', methods=['GET'])
+@app.route('/models', methods=['GET'], )
 def models():
     data = []
-    for key in models_parse.keys():
+    for key in sorted(models_parse.keys()):
         data.append({
             "name": key,
             "size": models_parse[key]["size"]
         })
 
-    return json.dumps({"models":data})
+    return json.dumps({"models": data})
 
 
+@app.route('/model/', defaults={'model_name': DEFAULT_MODEL})
 @app.route('/model/<model_name>', methods=['GET'])
 def model(model_name):
     path_model = f"Models/{model_name}"
-
+    print(path_model)
+    print(model_name in models_parse)
     if model_name in models_parse:
         return json.dumps(models_parse[model_name]), 200
 
     else:
-        return json.dumps({"error": f"model {model_name} doesn't exist"})
+        return json.dumps({"error": f"model {model_name} doesn't exist"}), 406
 
 
 @app.route('/resolve', methods=['POST'])
@@ -45,11 +48,10 @@ def resolve():
     model_name = request.json['model_name']
     data = request.json['data']
     constraints = request.json['constraints']
+
     print(constraints)
-    path_model = f"Models/{model_name}"
 
     # test if the model exist
-
     if not models_parse:
         return {"error": f"model {model_name} doesn't exist"}, 406
 
@@ -74,8 +76,6 @@ def resolve():
     # get the output and do traitement to get a validated json format
 
     response = child.stdout.read()
-
-    print(response)
     response = response.decode("utf-8")
 
     if "Error" in response:
@@ -94,7 +94,11 @@ def resolve():
         response = json.dumps({"statisfiable": False})
 
     else:
-        response = response.replace("-", "")
+        OKBLUE = '\033[94m'
+        ENDC = '\033[0m'
+
+        response = response.replace("-", "").replace("=", "")
+        print(OKBLUE, response, ENDC)
         response = json.dumps({"statisfiable": True, "solution": json.loads(response)})
 
     return response, 200

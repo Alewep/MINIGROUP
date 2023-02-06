@@ -132,8 +132,8 @@ th {
   cursor: pointer;
 }
 
-section#solution {
- border: 3px solid white;
+section#solution td {
+ font-size: xx-large;
 }
 
 #unsatisfied {
@@ -147,3 +147,4 @@ section#solution {
 
   font-size: 50px;
 }
+

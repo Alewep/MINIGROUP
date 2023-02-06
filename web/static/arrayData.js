@@ -22,6 +22,7 @@ function eraseTab(){
     while (tab.hasChildNodes()) {
         tab.removeChild(tab.lastChild);
     }
+
 }
 
 function eraseList(){

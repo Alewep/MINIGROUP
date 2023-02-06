@@ -47,6 +47,7 @@ constraint
 constraint
   forall(m, n in nom) (duo[m] == n -> duo[n] == m);
 
+% Satisfy
 solve satisfy;
 
 

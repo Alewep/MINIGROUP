@@ -1,18 +1,23 @@
 function getCheckboxValues() {
     let checkboxes = document.querySelectorAll('#constraint input[type="checkbox"]');
-    alert(checkboxes)
-    console.log(checkboxes)
-    checkboxes = Array.from(checkboxes).sort(x => x.value)
+    checkboxes = Array.from(checkboxes).sort(x => -x.value)
     let values = [];
     for (let check of checkboxes) {
-      values.push(check);
+      values.push(check.checked === true);
     }
     return values;
 }
 
+function erase_resolution(){
+    let solution = document.querySelector("#solution")
+
+    while(solution.hasChildNodes()){
+        solution.removeChild(solution.lastChild)
+    }
+}
+
 function createTable(data) {
     // Créer le tableau HTML
-    console.log(data)
     let table = document.createElement("table");
   
     // Pour chaque clé dans l'objet
@@ -28,7 +33,6 @@ function createTable(data) {
   
       // Créer la deuxième cellule pour la liste associée à la clé
       let cell2 = document.createElement("td");
-      console.log(data[key])
       let cell2Text = document.createTextNode(data[key].join(", "));
       cell2.appendChild(cell2Text);
       row.appendChild(cell2);
@@ -126,6 +130,7 @@ form.addEventListener("submit",function(e){
     e.preventDefault();
 
     dzn = createDzn(parseArray())
+    erase_resolution()
 
     if (dzn === "")
         return 
@@ -143,6 +148,7 @@ form.addEventListener("submit",function(e){
         let error = data["error"];
         if (error != undefined) alert(error);
         else {
+            console.log(data)
             if(data["statisfiable"]) {
 
                 solution.appendChild(createTable(data["solution"]))
@@ -159,6 +165,5 @@ form.addEventListener("submit",function(e){
 
         }
         
-    })
-    .catch(function(e) {alert(e)});
+    }).catch(function(e) {alert(e)});
 });
