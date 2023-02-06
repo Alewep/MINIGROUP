@@ -1,9 +1,11 @@
 function getCheckboxValues() {
     let checkboxes = document.querySelectorAll('#constraint input[type="checkbox"]');
-    checkboxes = Array.from(checkboxes).sort(x => -x.value)
-    let values = [];
+    let values = new Array(checkboxes.length).fill(false);
     for (let check of checkboxes) {
-      values.push(check.checked === true);
+        if(check.checked === true) {
+            values[check.value] = true
+        }
+      
     }
     return values;
 }

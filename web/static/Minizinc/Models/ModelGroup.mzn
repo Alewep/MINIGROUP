@@ -28,7 +28,7 @@ array[nom] of var set of nom: group;
 constraint forall(n in nom)(card(group[n]) == (size-1));
 
 % Habiter la même ville
-/*constraint forall(n1 in nom,n2 in group[n1] ) (les_villes[n1] == les_villes[n2]);*/
+constraint forall(n1 in nom,n2 in group[n1] ) (les_villes[n1] == les_villes[n2]);
 
 % Le nombre d’heures voulues doit être dans le créneau Min - Max shouaité par chacun
 /*constraint forall(n1 in nom,n2 in group[n1])(
